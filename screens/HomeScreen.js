@@ -1,31 +1,140 @@
 import React, { Component } from "react";
-import { StyleSheet, View,  SafeAreaView, Image, TouchableOpacity, Text, Platform, StatusBar, TextInput} from "react-native";
-import * as Font from "expo-font";
+import { StyleSheet, View,  SafeAreaView, TouchableOpacity, Text, Platform, StatusBar, TextInput, ScrollView} from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import Header from "./components/Header"
+import Header from "./components/Header";
+import Post from "./components/Post";
 
+let stories = require("./temp_stories.json");
 
-let customFonts = {
-  "Bubblegum-Sans": require("../assets/Fonts/BubblegumSans-Regular.ttf")
-};
-
-export default class HomeScreen extends Component {
+export default class SearchScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fontsLoaded: false,
+      stories:[],
     };
   }
 
+  componentDidMount(){
+    let story=[];
+      Object.keys(stories).map(item=>{
+        story.push(item)
+      })
+      this.setState({ stories: story})
+    console.log(story)
+  }
+
+
+  renderItem = ({ item: story }) => {
+    return <Post story={story} navigation={this.props.navigation}/>
+  }
+
+  keyExtractor = (item, index) => index.toString()
+
   render(){
       return (
+        
         <View style={styles.container}>
-          <SafeAreaView style={styles.droidSafeArea}/>
+          
+        <SafeAreaView style={styles.droidSafeArea}/>
+        <View Style={{
+          paddingTop:-100
+        }}>
           <Header/>
-          <View>
+        </View>
+        <ScrollView style={styles.scrollView}>
+          <View style={styles.postContainer}>
+                    <TouchableOpacity
+                    style={[styles.postAlike, {margin:5, backgroundColor:"#dc143c"}]}
+                    onPress={()=>
+                        this.props.navigation.navigate("HomeProjectScreen")
+                    }
+                    >
+                    <View style={styles.centerButtonIcon}>
+                      <Ionicons
+                      name="map-outline"
+                      size={70}
+                      color={'#F5F5F5'}
+                      />
+                    </View>
+                    <View>
+                      <Text Style={styles.IDFont}>
+                        {'#001'}
+                      </Text>
+                    </View>
+                    <View style={styles.buttonIcon}>
+                      <Ionicons
+                        name="heart"
+                        size={30}
+                        color={'#F5F5F5'}
+                        //style={styles.buttonIconHeart}
+                        />
+                      <Ionicons
+                        name="chatbubble-outline"
+                        size={30}
+                        color={'#F5F5F5'}
+                        //style={styles.buttonIcon}
+                        />
+                      <Ionicons
+                        name="download-outline"
+                        size={30}
+                        color={'#F5F5F5'}
+                        //style={styles.buttonIcon}
+                        />
+                    </View>
+                    </TouchableOpacity>
+            </View>
 
-          </View>
+            <View style={styles.postContainer}>
+                    <TouchableOpacity
+                    style={[styles.postAlike, {margin:-350, backgroundColor:"#dc143c", marginBottom:20}]}
+                    onPress={()=>
+                        this.props.navigation.navigate("HomeProjectScreen")
+                    }
+                    >
+                    <View style={styles.centerButtonIcon}>
+                      <Ionicons
+                      name="map-outline"
+                      size={70}
+                      color={'#F5F5F5'}
+                      />
+                    </View>
+                    <View>
+                      <Text Style={styles.IDFont}>
+                        {'#002'}
+                      </Text>
+                    </View>
+                    <View style={styles.buttonIcon}>
+                      <Ionicons
+                        name="heart"
+                          size={30}
+                          color={'#F5F5F5'}
+                          //style={styles.buttonIconHeart}
+                          />
+                      <Ionicons
+                          name="chatbubble-outline"
+                          size={30}
+                          color={'#F5F5F5'}
+                          //style={styles.buttonIconComent}
+                          />
+                      <Ionicons
+                          name="download-outline"
+                          size={30}
+                          color={'#F5F5F5'}
+                          //style={styles.buttonIconDownload}
+                          />
+                    </View>
+                    </TouchableOpacity>
+                </View>
+              </ScrollView>
+
+          {/* <View style={styles.postContainer}>
+              <FlatList
+                keyExtractor={this.keyExtractor}
+                data={this.state.stories}
+                renderItem={this.renderItem}
+              />
+            </View> */}
         </View>
       );
     }
@@ -34,7 +143,6 @@ export default class HomeScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#F5F5F5",
     flex: 1,
   },
   droidSafeArea: {
@@ -44,6 +152,10 @@ const styles = StyleSheet.create({
     flex: 0.4,
     justifyContent: "center",
     alignItems: "center",
+  },
+  IDFont:{
+    color: "white",
+    fontSize: RFValue(40),
   },
   appIcon: {
     width: RFValue(90),
@@ -55,7 +167,6 @@ const styles = StyleSheet.create({
   appTitleText: {
     color: "black",
     fontSize: RFValue(40),
-    //fontFamily: "Bubblegum-Sans",
     textAlign:"center"
   },
   buttonContainer:{
@@ -76,47 +187,6 @@ const styles = StyleSheet.create({
     borderRadius: RFValue(30),
     backgroundColor:"white",
     paddingHorizontal:20
-  },
-  gitButton:{
-    width: RFValue(40),
-    height: RFValue(40),
-    flexDirection:"column",
-    justifyContent:"space-evenly",
-    alignItems:"center",
-    borderRadius: RFValue(30),
-    backgroundColor:"purple",
-    paddingHorizontal:20
-  },
-  discordButton:{
-    width: RFValue(40),
-    height: RFValue(40),
-    flexDirection:"column",
-    justifyContent:"space-evenly",
-    alignItems:"center",
-    borderRadius: RFValue(30),
-    backgroundColor:"black",
-    paddingHorizontal:20
-  },
-  googleIcon:{
-    width: RFValue(25),
-    height: RFValue(25),
-    resizeMode: "contain",
-  },
-  gitIcon:{
-    width: RFValue(30),
-    height: RFValue(30),
-    resizeMode: "contain",
-  },
-  googleText:{
-    color:"black",
-    fontSize: RFValue(40),
-    fontFamily: "Bubblegum-Sans",
-  },
-  cloudContainer:{
-    flex:0.3
-  },
-  inputContainer:{
-    margin:10,
   },
   input: {
     height: 50,
@@ -151,8 +221,6 @@ const styles = StyleSheet.create({
     alignItems:"center",
     flexDirection:"row",
     alignSelf:"stretch",
-    
-
   },
   loginButton:{
     width: RFValue(100),
@@ -164,7 +232,51 @@ const styles = StyleSheet.create({
     backgroundColor:"white",
     paddingHorizontal:20
   },
+  centerButtonIcon:{
+    justifyContent:"center",
+    alignItems:"center",
+    flexDirection:"row",
+    marginTop:120,
+    alignSelf:"stretch",
+  },
   buttonIcon:{
-    position:"absolute",
+    justifyContent:"flex-start",
+    alignItems:"center",
+    flexDirection:"row",
+    marginTop:110,
+    alignSelf:"stretch",
+  },
+  postContainer:{
+    flex:0.01,
+    justifyContent:"center",
+    alignItems:"center",
+    flexDirection:"column",
+    alignSelf:"stretch",
+  },
+  postAlike:{
+    width: RFValue(300),
+    height: RFValue(300),
+    flexDirection:"column",
+    justifyContent:"center",
+    alignItems:"center",
+    borderRadius: RFValue(30),
+    backgroundColor:"white",
+    paddingHorizontal:20,
+    marginTop:RFValue(20)
+  },
+  buttonIconHeart:{
+    flexDirection:"row",
+    marginLeft:RFValue(-250),
+    marginTop:RFValue(250)
+  },
+  buttonIconComent:{
+    flexDirection:"row",
+    marginLeft:RFValue(-250),
+    marginTop:RFValue(250)
+  },
+  buttonIconDownload:{
+    flexDirection:"row",
+    marginLeft:RFValue(-250),
+    marginTop:RFValue(250)
   }
 });

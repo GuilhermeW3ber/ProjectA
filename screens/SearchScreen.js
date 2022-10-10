@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { StyleSheet, View,  SafeAreaView, Image, TouchableOpacity, Text, Platform, StatusBar, TextInput, ScrollView} from "react-native";
+import { StyleSheet, View,  SafeAreaView, TouchableOpacity, Platform, StatusBar, Text, ScrollView} from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import Header from "./components/Header"
-import { FlatList } from "react-native-gesture-handler";
+import Header from "./components/Header";
 import Post from "./components/Post";
 
 let stories = require("./temp_stories.json");
@@ -27,10 +26,10 @@ export default class SearchScreen extends Component {
 
 
   renderItem = ({ item: story }) => {
-    return <Post story={story} navigation={this.props.navigation}/>;
-  };
+    return <Post story={story} navigation={this.props.navigation}/>
+  }
 
-  keyExtractor = (item, index) => index.toString();
+  keyExtractor = (item, index) => index.toString()
 
   render(){
       return (
@@ -38,30 +37,188 @@ export default class SearchScreen extends Component {
         <View style={styles.container}>
           
         <SafeAreaView style={styles.droidSafeArea}/>
-          <View> 
-            <Header/>
-          </View>
-
-          <View style={styles.postContainer}>
-              <FlatList
-                keyExtractor={this.keyExtractor}
-                data={this.state.stories}
-                renderItem={this.renderItem}
-              />
-            </View>
+        <View Style={{
+          paddingTop:-100
+        }}>
+          <Header/>
         </View>
+          <ScrollView style={styles.scrollView}>
+            <View style={styles.postContainer}>
+                    <TouchableOpacity
+                      style={[styles.postAlike, { backgroundColor:"#dc143c"}]}
+                      onPress={()=>
+                          this.props.navigation.navigate("ProjectScreen")
+                      }
+                      >
+                    <View style={styles.centerButtonIcon}>
+                      <Ionicons
+                      name="map-outline"
+                      size={70}
+                      color={'#F5F5F5'}
+                      style={styles.buttonIconMap}
+                      />
+                    </View>
+                    <View>
+                      <Text Style={styles.IDFont}>
+                        {'#001'}
+                      </Text>
+                    </View>
+                      <View style={styles.buttonIcon}>
+                        <Ionicons
+                            name="heart-outline"
+                            size={30}
+                            color={'#F5F5F5'}
+                            //style={styles.buttonIconHeart}
+                            />
+                        <Ionicons
+                            name="download-outline"
+                            size={30}
+                            color={'#F5F5F5'}
+                            //style={styles.buttonIcon}
+                            />
+                      </View>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                      style={[styles.postAlike, { backgroundColor:"#dc143c"}]}
+                      onPress={()=>
+                          this.props.navigation.navigate("ProjectScreen")
+                      }
+                      >
+                      <View style={styles.centerButtonIcon}>
+                        <Ionicons
+                        name="map-outline"
+                        size={70}
+                        color={'#F5F5F5'}
+                        style={styles.buttonIconMap}
+                        />
+                      </View>
+                      <View>
+                        <Text Style={styles.IDFont}>
+                          {'#002'}
+                        </Text>
+                      </View>
+                      <View style={styles.buttonIcon}>
+                        <Ionicons
+                            name="heart-outline"
+                            size={30}
+                            color={'#F5F5F5'}
+                            //style={styles.buttonIconHeart}
+                            />
+                        <Ionicons
+                            name="download-outline"
+                            size={30}
+                            color={'#F5F5F5'}
+                            //style={styles.buttonIconDownload}
+                            />
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+
+                  <View style={styles.postContainer}>
+                    <TouchableOpacity
+                      style={[styles.postAlike, { backgroundColor:"#dc143c"}]}
+                      onPress={()=>
+                          this.props.navigation.navigate("ProjectScreen")
+                      }
+                      >
+                      <View style={styles.centerButtonIcon}>
+                        <Ionicons
+                        name="map-outline"
+                        size={70}
+                        color={'#F5F5F5'}
+                        style={styles.buttonIconMap}
+                        />
+                      </View>
+                      <View>
+                        <Text Style={styles.IDFont}>
+                          {'#003'}
+                        </Text>
+                      </View>
+                        
+                      <View style={styles.buttonIcon}>
+                        <Ionicons
+                            name="heart-outline"
+                            size={30}
+                            color={'#F5F5F5'}
+                            //style={styles.buttonIconHeart}
+                            />
+                        <Ionicons
+                            name="download-outline"
+                            size={30}
+                            color={'#F5F5F5'}
+                            //style={styles.buttonIcon}
+                            />
+                      </View>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                      style={[styles.postAlike, { backgroundColor:"#dc143c"}]}
+                      onPress={()=>
+                          this.props.navigation.navigate("ProjectScreen")
+                      }>
+                      <View style={styles.centerButtonIcon}>
+                        <Ionicons
+                        name="map-outline"
+                        size={70}
+                        color={'#F5F5F5'}
+                        style={styles.buttonIconMap}
+                        />
+                      </View>
+                      <View>
+                        <Text Style={styles.IDFont}>
+                          {'#004'}
+                        </Text>
+                      </View>
+                      <View style={styles.buttonIcon}>
+                        <Ionicons
+                            name="heart-outline"
+                            size={30}
+                            color={'#F5F5F5'}
+                            //style={styles.buttonIconHeart}
+                            />
+                        <Ionicons
+                            name="download-outline"
+                            size={30}
+                            color={'#F5F5F5'}
+                            //style={styles.buttonIconDownload}
+                            />
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+
+                  <View style={styles.addPostAlikeContainer}>
+                    <TouchableOpacity
+                      style={[styles.addPostAlike, { backgroundColor:"#dcdcdc"}]}
+                      onPress={()=>
+                          this.props.navigation.navigate("CreateProject")
+                      }
+                      > 
+                      <View style={styles.buttonIconAdd}>
+                        <Ionicons
+                            name="add"
+                            size={60}
+                            color={'#F5F5F5'}
+                            //style={styles.buttonIconHeart}
+                            />
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                </ScrollView>
+      </View>
       );
     }
-
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "green",
     flex: 1,
   },
   droidSafeArea: {
     marginTop: Platform.OS === "android" ? StatusBar.currentHeight : RFValue(35)
+  },
+  buttonIconMap:{
+    marginTop:RFValue(25),
   },
   appTitle: {
     flex: 0.4,
@@ -75,10 +232,34 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
 
   },
+  addPostAlikeContainer:{
+    flex:0.01,
+    justifyContent:"space-around",
+    flexDirection:"row",
+    alignSelf:"stretch",
+    //backgroundColor:"yellow"
+
+  },
+  addPostAlike:{
+    width: RFValue(100),
+    height: RFValue(100),
+    flexDirection:"column",
+    justifyContent:"center",
+    alignItems:"center",
+    borderRadius: RFValue(30),
+    backgroundColor:"white",
+    marginTop:RFValue(20),
+    marginTop:RFValue(70),
+
+  },
+  buttonIconAdd:{
+    justifyContent:"space-around",
+    alignItems:"center",
+    flexDirection:"column",
+  },
   appTitleText: {
     color: "black",
     fontSize: RFValue(40),
-    //fontFamily: "Bubblegum-Sans",
     textAlign:"center"
   },
   buttonContainer:{
@@ -100,110 +281,44 @@ const styles = StyleSheet.create({
     backgroundColor:"white",
     paddingHorizontal:20
   },
-  gitButton:{
-    width: RFValue(40),
-    height: RFValue(40),
-    flexDirection:"column",
-    justifyContent:"space-evenly",
-    alignItems:"center",
-    borderRadius: RFValue(30),
-    backgroundColor:"purple",
-    paddingHorizontal:20
-  },
-  discordButton:{
-    width: RFValue(40),
-    height: RFValue(40),
-    flexDirection:"column",
-    justifyContent:"space-evenly",
-    alignItems:"center",
-    borderRadius: RFValue(30),
-    backgroundColor:"black",
-    paddingHorizontal:20
-  },
-  googleIcon:{
-    width: RFValue(25),
-    height: RFValue(25),
-    resizeMode: "contain",
-  },
-  gitIcon:{
-    width: RFValue(30),
-    height: RFValue(30),
-    resizeMode: "contain",
-  },
-  googleText:{
-    color:"black",
-    fontSize: RFValue(40),
-    fontFamily: "Bubblegum-Sans",
-  },
-  cloudContainer:{
-    flex:0.3
-  },
-  inputContainer:{
-    margin:10,
-  },
-  input: {
-    height: 50,
-    backgroundColor:"#CCC",
-    paddingLeft:40,
-    borderRadius: 8,
-    padding: 10,
-    marginHorizontal:20,
-    fontSize:18,
-    borderColor:'#E4E7EB'
-
-  },
   icon:{
     position:"absolute",
     left:30,
     top:12
   },
-  iconSecret:{
-    position:"absolute",
-    right:10,
-    top:12
-  },
-  cloudImage:{
-    position:"absolute",
-    width: "100%",
-    resizeMode: "contain",
-    bottom:RFValue(-5)
-  },
-  loginButtonContainer:{
-    flex:1,
-    justifyContent:"center",
+
+  buttonIcon:{
+    justifyContent:"space-around",
     alignItems:"center",
     flexDirection:"row",
+    marginTop:10,
     alignSelf:"stretch",
-  },
-  loginButton:{
-    width: RFValue(100),
-    height: RFValue(100),
-    flexDirection:"column",
-    justifyContent:"center",
-    alignItems:"center",
-    borderRadius: RFValue(30),
-    backgroundColor:"white",
-    paddingHorizontal:20
-  },
-  buttonIcon:{
-    position:"absolute",
   },
   postContainer:{
-    flex:1,
-    justifyContent:"center",
-    alignItems:"center",
-    flexDirection:"column",
+    flex:0.01,
+    justifyContent:"space-around",
+    flexDirection:"row",
     alignSelf:"stretch",
+    //backgroundColor:"yellow"
   },
   postAlike:{
-    width: RFValue(300),
-    height: RFValue(300),
+    width: RFValue(150),
+    height: RFValue(150),
     flexDirection:"column",
     justifyContent:"center",
     alignItems:"center",
     borderRadius: RFValue(30),
     backgroundColor:"white",
-    paddingHorizontal:20,
-    marginTop:RFValue(450)
+    marginTop:RFValue(20)
+  },
+  buttonIconHeart:{
+    flexDirection:"row",
+    marginLeft:RFValue(-250),
+    marginTop:RFValue(250)
+  },
+  buttonIconDownload:{
+    flexDirection:"row",
+    marginLeft:RFValue(-250),
+    marginTop:RFValue(250)
   }
 });

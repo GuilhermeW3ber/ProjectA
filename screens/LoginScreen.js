@@ -112,7 +112,7 @@ export default class LoginScreen extends Component {
             <TouchableOpacity
               style={[styles.loginButton, {margin:5, backgroundColor:"#dc143c"}]}
               onPress={()=>
-                this.props.navigation.navigate("HomeScreen")
+                this.props.navigation.navigate("TabNavigator")
               }
               >
               <Ionicons

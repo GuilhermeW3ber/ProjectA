@@ -1,12 +1,12 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'; 
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'; 
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { RFValue } from 'react-native-responsive-fontsize';
 import HomeScreen from '../screens/HomeScreen';
-import SearchCreen from '../screens/SearchScreen';
+import SearchScreen from '../screens/SearchScreen';
 
-const Tab = createMaterialBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 export default class BottomTabNavigator extends React.Component{
     constructor(props){
@@ -32,8 +32,6 @@ export default class BottomTabNavigator extends React.Component{
     render(){
         return (
             <Tab.Navigator
-                labeled={false}
-                barStyle={styles.bottomTabStyle}
                 screenOptions={({ route }) => ({
                     tabBarIcon: ({ focused, color, size }) => {
                         let iconName;
@@ -47,8 +45,26 @@ export default class BottomTabNavigator extends React.Component{
                         return <Ionicons name={iconName} size={RFValue(25)} color={color} style={styles.icons} />;
                     },
                 })}
-                activeColor={'#EE8249'}
-                inactiveColor={'gray'}
+                tabBarOptions={{activeTintColor:'#ffffff',
+                inactiveTintColor:'#000000',
+                style:{
+                  height:150,
+                  borderTopWidth:0,
+                  backgroundColor:"#dc143c"
+                },
+                labelStyle:{
+                  fontSize:20,
+                },
+                labelPosition:"beside-icon",
+                tabStyle:{
+                  marginTop:10,
+                  marginLeft:10,
+                  marginRight:10,
+                  borderRadius:30,
+                  alignItens:'center',
+                  justfyContent:'center',
+                  backgroundColor:"#dc143c"
+                }}}
                 >
                 <Tab.Screen
                     name="Home"
@@ -56,7 +72,7 @@ export default class BottomTabNavigator extends React.Component{
                 />
                <Tab.Screen
                     name="Search"
-                    component={SearchCreen}
+                    component={SearchScreen}
                 />
             </Tab.Navigator>
         );
